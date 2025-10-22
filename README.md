@@ -9,8 +9,8 @@ Python time module.
 ## Section 1: Webex Messaging API (7 marks)✅
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
-| Authentication Method | `_______________________________` |
+| API Base URL | `_____________Webex.com__________________` |
+| Authentication Method | `_______________Bearer token________________` |
 | Endpoint to list rooms | `_______________________________` |
 | Endpoint to get messages | `_______________________________` |
 | Endpoint to send message | `_______________________________` |
