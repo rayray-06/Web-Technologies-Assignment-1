@@ -9,13 +9,17 @@ Python time module.
 ## Section 1: Webex Messaging API (7 marks)✅
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_____________Webex.com__________________` |
-| Authentication Method | `_______________Bearer token________________` |
-| Endpoint to list rooms | `________________/rooms_______________` |
-| Endpoint to get messages | `______________/messages_________________` |
-| Endpoint to send message | `______________/messages_________________` |
-| Required headers | `_______________________________` |
-| Sample full GET or POST request | `_______________________________` |
+| API Base URL | `____________[_Webex.com](https://webexapis.com/v1/room/tabs/{id} \)__________________` |
+| Authentication Method | `_______________Authorization: Bearer ZTg1MDJiZTgtMjQ1NC00OGQzLWJjOTItOGZhYTdjNzM0OTc0ZWI3MmFhMmUtNGUx_P0A1_636b97a0-b0af-4297-b0e7-480dd517b3f9' \___Bearer_____________` |
+| Endpoint to list rooms | `______________v1/room/tabs/{id}_________________` |
+| Endpoint to get messages | `_________GET_______/v1/messages/{messageId} \______________` |
+| Endpoint to send message | `_________POST_______/v1/messages \_______________` |
+| Required headers | `______________--header 'Authorization: Bearer ZTg1MDJiZTgtMjQ1NC00OGQzLWJjOTItOGZhYTdjNzM0OTc0ZWI3MmFhMmUtNGUx_P0A1_636b97a0-b0af-4297-b0e7-480dd517b3f9' \
+--header 'Accept: application/json'_________________` |
+| Sample full GET or POST request | `___________curl -L --request GET \
+--url https://webexapis.com/v1/room/tabs/{id} \
+--header 'Authorization: Bearer ZTg1MDJiZTgtMjQ1NC00OGQzLWJjOTItOGZhYTdjNzM0OTc0ZWI3MmFhMmUtNGUx_P0A1_636b97a0-b0af-4297-b0e7-480dd517b3f9' \
+--header 'Accept: application/json'____________________` |
 ---
 ## Section 2: ISS Current Location API (3 marks)
 | Criteria | Details |
