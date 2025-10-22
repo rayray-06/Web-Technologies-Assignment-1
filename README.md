@@ -11,9 +11,9 @@ Python time module.
 |---------|---------|
 | API Base URL | `_____________Webex.com__________________` |
 | Authentication Method | `_______________Bearer token________________` |
-| Endpoint to list rooms | `_______________________________` |
-| Endpoint to get messages | `_______________________________` |
-| Endpoint to send message | `_______________________________` |
+| Endpoint to list rooms | `________________/rooms_______________` |
+| Endpoint to get messages | `______________/messages_________________` |
+| Endpoint to send message | `______________/messages_________________` |
 | Required headers | `_______________________________` |
 | Sample full GET or POST request | `_______________________________` |
 ---
