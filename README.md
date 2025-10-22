@@ -24,8 +24,8 @@ Python time module.
 ## Section 2: ISS Current Location API (3 marks)
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
-| Endpoint for current ISS location | `_______________________________` |
+| API Base URL | `_________________  $.getJSON('http://api.open-notify.org/iss-now.json?callback=?______________` |
+| Endpoint for current ISS location | `________________/iss-now.json_______________` |
 | Sample response format (example JSON) |
 ```
 ```
@@ -34,7 +34,7 @@ Python time module.
 ## Section 3: Geocoding API (LocationIQ or Mapbox or other) (6 marks)
 | Criteria | Details |
 |---------|---------|
-| Provider used (circle one) | **LocationIQ / Mapbox/ other -provide detail** |
+| Provider used (circle one) | **LocationIQ / Mapbox/ other -provide detail** |\
 | API Base URL | `_______________________________` |
 | Endpoint for reverse geocoding | `_______________________________` |
 | Authentication method | `_______________________________` |
