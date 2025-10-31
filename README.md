@@ -34,9 +34,9 @@ Python time module.
 ## Section 3: Geocoding API (LocationIQ or Mapbox or other) (6 marks)
 | Criteria | Details |
 |---------|---------|
-| Provider used (circle one) | **LocationIQ / Mapbox/ other -provide detail** |\
-| API Base URL | `_______________________________` |
-| Endpoint for reverse geocoding | `_______________________________` |
+| Provider used (circle one) | **LocationIQ \
+| API Base URL | `_____________https://us1.locationiq.com/v1/reverse__________________` |
+| Endpoint for reverse geocoding | `__________v1/reverse \_____________________` |
 | Authentication method | `_______________________________` |
 | Required query parameters | `_______________________________` |
 | Sample request with latitude/longitude | `_______________________________` |
