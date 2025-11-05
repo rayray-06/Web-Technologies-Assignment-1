@@ -91,8 +91,8 @@ print(f'Elapsed: {end - start:.2f} seconds')
 ---
 ## 🚀 Section 5: Web Architecture & MVC Design Pattern (12 marks)
 ### 🚀 Web Architecture – Client-Server Model
-- **Client**:
-- **Server**:
+- **Client**: the client in this case is the spcae bot program because it sends requests to different websites to get a response 
+- **Server**: the server in this case would be all the API's as they recieve the request and return them
 - (Explain the communication between them & include a block diagram )
 ### 🚀 RESTful API Usage
 -
