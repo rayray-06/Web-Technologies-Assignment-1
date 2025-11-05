@@ -94,6 +94,9 @@ print(f'Elapsed: {end - start:.2f} seconds')
 - **Client**: the client in this case is the spcae bot program because it sends requests to different websites to get a response 
 - **Server**: the server in this case would be all the API's as they recieve the request and return them
 - (Explain the communication between them & include a block diagram )
+- The user sends a command into webex, the bot calls the iss api to get the coordiantes of the command then the geocoding api finds the location once its found the coordiantes and location it sends it back to the client
+- <img width="451" height="631" alt="image" src="https://github.com/user-attachments/assets/de78c3ba-2808-44d7-aab9-4a28d17ec1a3" />
+
 ### 🚀 RESTful API Usage
 -
 -
