@@ -75,13 +75,19 @@ Python time module.
 ## 🚀 Section 4: Epoch to Human Time Conversion (Python time module) (2 marks)
 | Criteria | Details |
 |---------|---------|
-| Library used | `_______________________________` |
-| Function used to convert epoch | `_______________________________` |
+| Library used | `_______________time________________` |
+| Function used to convert epoch | `_____________time.time()__________________` |
 | Sample code to convert timestamp |
+import time
+start = time.time()
+print(f'Start time: {start}')
+time.sleep(1)
+end = time.time()
+print(f'Elapsed: {end - start:.2f} seconds')
 ```
 ```
 |
-| Output (human-readable time) | `_______________________________` |
+| Output (human-readable time) | `_____________| ____Start time: 1711891234.567890 Elapsed: 1.00 seconds_|__________________` |
 ---
 ## 🚀 Section 5: Web Architecture & MVC Design Pattern (12 marks)
 ### 🚀 Web Architecture – Client-Server Model
