@@ -43,14 +43,14 @@ if choice == "n":
 else:
 accessToken = "Bearer <!!!REPLACEME with hard-coded token!!!>"
 # 3. Provide the URL to the Webex room API.
-r = requests.get( "<!!!REPLACEME with URL!!!>",
+r = requests.get( "https://webexapis.com/v1/rooms",
 headers = {"Authorization": accessToken}
 )
 ###################################################################################
 ####
 # DO NOT EDIT ANY BLOCKS WITH r.status_code
 if not r.status_code == 200:
-raise Exception("Incorrect reply from Webex API. Status code: {}. Text:
+    raise Exception("Incorrect reply from Webex API. Status code: {}. Text:
 {}".format(r.status_code, r.text))
 ###################################################################################
 ####
@@ -58,7 +58,7 @@ raise Exception("Incorrect reply from Webex API. Status code: {}. Text:
 print("\nList of available rooms:")
 rooms = r.json()["items"]
 for room in rooms:
-<!!!REPLACEME with print code to finish the loop>
+    print("type:", room["type"], "Title:", room["title"] )
 ###################################################################################
 ####
 # SEARCH FOR WEBEX ROOM TO MONITOR
