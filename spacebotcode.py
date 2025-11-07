@@ -1,11 +1,8 @@
 
-Page
-4
-of 4
 ###############################################################
 #This is just a starter code for the assignment 1,
 # you need to follow the assignment brief to complete all the tasks required by the
-assessemnt brief
+#assessemnt brief
 #
 # This program:
 # - Asks the user to enter an access token or use the hard coded access token.
@@ -14,12 +11,12 @@ assessemnt brief
 # - Monitors the selected Webex Team room every second for "/seconds" messages.
 # - Discovers GPS coordinates of the ISS flyover using ISS API.
 # - Display the geographical location using geolocation API based on the GPS
-coordinates.
+#coordinates.
 # - Formats and sends the results back to the Webex Team room.
 #
 # The student will:
 # 1. Import libraries for API requests, JSON formatting, epoch time conversion, and
-iso3166.
+#iso3166.
 # 2. Complete the if statement to ask the user for the Webex access token.
 # 3. Provide the URL to the Webex room API.
 # 4. Create a loop to print the type and title of each room.
@@ -34,8 +31,11 @@ iso3166.
 # 13. Complete the code to post the message to the Webex room.
 ###############################################################
 # 1. Import libraries for API requests, JSON formatting, epoch time conversion, and
-iso3166.
-<!!!REPLACEME with code for libraries>
+#iso3166.
+import requests
+import json
+import time
+import iso3166
 # 2. Complete the if statement to ask the user for the Webex access token.
 choice = input("Do you wish to use the hard-coded Webex token? (y/n) ")
 <!!!REPLACEME with if statements to ask user for the Webex Access Token!!!>
