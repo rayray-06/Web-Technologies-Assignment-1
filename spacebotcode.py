@@ -122,32 +122,38 @@ if seconds > 5:
 seconds = 5
 time.sleep(seconds)
 # 6. Provide the URL to the ISS Current Location API.
-r = requests.get("http://api.open-notify.org/iss-now.json")
+r = requests.get("http://api.open-notify.org/iss-now.json") 
 json_data = r.json()
 if r.status_code != 200:
     print("ISS data could not be retrived ")
 # 7. Record the ISS GPS coordinates and timestamp.
 lat = json_data["ISS POSITION"]["Latitiude"]
 lng = json_data["ISS POSITION"]["Longitude"]
-timestamp = json_data["<!!!REPLACEME!!!> with path to timestamp key!!!>"]
+timestamp = json_data["timestamp"]
 # 8. Convert the timestamp epoch value to a human readable date and time.
 # Use the time.ctime function to convert the timestamp to a human readable
 date and time.
-timeString = <!!!REPLACEME with conversion code!!!>
+timeString = time.ctime(timestamp)
 # 9. Provide your Geoloaction API consumer key.
 mapsAPIGetParameters = {
-<!!!REPLACEME with all the required paramenters by
-the api>
+    "key": "my locationIQ API key"
+    "lat": lat,
+    "lon": lng,
+    "format": "json"
 }
-# 10. Provide the URL to the Reverse GeoCode API.
+ 
+r = r.requests.get("https://us1.locationiq.com/v1/reverse")
 # Get location information using the API reverse geocode service using the HTTP
 GET method
-r = requests.get("<!!!REPLACEME with URL!!!>",
+r = requests.get("https://us1.locationiq.com/v1/reverse",
 params = mapsAPIGetParameters
 )
 # Verify if the returned JSON data from the API service are OK
-json_data = <!!!REPLACEME with code>
-<!!!REPLACEME with code for error handling in case no response>
+json_data = r.json()
+if r.status_code != 200:
+    print("location data could not be obtained")
+else:
+    print ("Location data obtained")
 # 11. Store the location received from the API in a required variables
 CountryResult = json_data["<!!!REPLACEME!!!> with path to adminArea1 key!!!
 >"]
@@ -186,4 +192,3 @@ data = json.dumps(<!!!REPLACEME!!!>),
 headers = <!!!REPLACEME!!!>
 )
 <!!!REPLACEME with code for error handling in case request not successfull>
-
