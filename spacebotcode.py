@@ -98,36 +98,37 @@ GetParameters = {
 "max": 1
 }
 # 5. Provide the URL to the Webex messages API.
-r = requests.get("<!!!REPLACEME with URL!!!>",
+r = requests.get("https://webexapis.com/v1/messages",
 params = GetParameters,
 headers = {"Authorization": accessToken}
 )
 # verify if the retuned HTTP status code is 200/OK
-if not r.status_code == <!!!REPLACEME with http code>:
+if not r.status_code == 200:
 raise Exception( "Incorrect reply from Webex API. Status code: {}. Text:
 {}".format(r.status_code, r.text))
 json_data = r.json()
 if len(json_data["items"]) == 0:
-<!!!REPLACEME with code for error handling>
+    print("No messages in room")
 messages = json_data["items"]
 message = messages[0]["text"]
-<!!!REPLACEME with print code to print message>
+print("message recieved :", message )
 if message.find("/") == 0:
 if (message[1:].isdigit()):
 seconds = int(message[1:])
 else:
-<!!!REPLACEME with code for error handling>
+    print("Input is invalid, try again")
 #for the sake of testing, the max number of seconds is set to 5.
 if seconds > 5:
 seconds = 5
 time.sleep(seconds)
 # 6. Provide the URL to the ISS Current Location API.
-r = requests.get("<!!!REPLACEME with URL!!!>")
-json_data = <!!!REPLACEME with code>
-<!!!REPLACEME with code for error handling in case not success response>
+r = requests.get("http://api.open-notify.org/iss-now.json")
+json_data = r.json()
+if r.status_code != 200:
+    print("ISS data could not be retrived ")
 # 7. Record the ISS GPS coordinates and timestamp.
-lat = json_data["<!!!REPLACEME!!!> with path to latitude key!!!>"]
-lng = json_data["<!!!REPLACEME!!!> with path to longitude key!!!>"]
+lat = json_data["ISS POSITION"]["Latitiude"]
+lng = json_data["ISS POSITION"]["Longitude"]
 timestamp = json_data["<!!!REPLACEME!!!> with path to timestamp key!!!>"]
 # 8. Convert the timestamp epoch value to a human readable date and time.
 # Use the time.ctime function to convert the timestamp to a human readable
@@ -185,3 +186,4 @@ data = json.dumps(<!!!REPLACEME!!!>),
 headers = <!!!REPLACEME!!!>
 )
 <!!!REPLACEME with code for error handling in case request not successfull>
+
