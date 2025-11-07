@@ -155,8 +155,10 @@ if r.status_code != 200:
 else:
     print ("Location data obtained")
 # 11. Store the location received from the API in a required variables
-CountryResult = json_data["<!!!REPLACEME!!!> with path to adminArea1 key!!!
->"]
+CountryResult = CountryResult = json_data["address"].get("country", "Unknown")
+StateResult = json_data["address"].get("state", "Unknown")
+CityResult = json_data["address"].get("city", "Unknown")
+StreetResult = json_data["address"].get("road", "Unknown")
 <!!!REPLACEME with code to save state, city, street etc>
 #Find the country name using ISO3611 country code
 if not CountryResult == "XZ":
