@@ -38,7 +38,8 @@ import time
 import iso3166
 # 2. Complete the if statement to ask the user for the Webex access token.
 choice = input("Do you wish to use the hard-coded Webex token? (y/n) ")
-<!!!REPLACEME with if statements to ask user for the Webex Access Token!!!>
+if choice == "n":
+    InputToken = input("Enter your webex access token ")
 else:
 accessToken = "Bearer <!!!REPLACEME with hard-coded token!!!>"
 # 3. Provide the URL to the Webex room API.
