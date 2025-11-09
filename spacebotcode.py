@@ -1,46 +1,58 @@
 ###############################################################
-# Space Bot Assignment 1
-# This program connects to Webex, listens for "/seconds" messages,
-# gets ISS location info and converts it to a readable address.
+#This is just a starter code for the assignment 1,
+# you need to follow the assignment brief to complete all the tasks required by the
+#assessment brief
+#
+# This program:
+# - Asks the user to enter an access token or use the hard coded access token.
+# - Lists the user's Webex rooms.
+# - Asks the user which Webex room to monitor for "/seconds" of requests.
+# - Monitors the selected Webex Team room every second for "/seconds" messages.
+# - Discovers GPS coordinates of the ISS flyover using ISS API.
+# - Display the geographical location using geolocation API based on the GPS coordinates.
+# - Formats and sends the results back to the Webex Team room.
 ###############################################################
 
+# 1. Import libraries for API requests, JSON formatting, epoch time conversion, and iso3166.
 import requests
 import json
 import time
-from iso3166 import countries  # added so I can use country names from country codes
+from iso3166 import countries  # I added this so I can use country names later
 
-# ask the user if they want to use their own token or the hard-coded one
+# 2. Complete the if statement to ask the user for the Webex access token.
 choice = input("Do you wish to use the hard-coded Webex token? (y/n) ")
 
 if choice == "n":
-    # added this part to allow manual token input when testing
-    InputToken = input("Enter your Webex access token: ")
-    accessToken = "Bearer " + InputToken
+    InputToken = input("Enter your Webex access token: ")  # added this to allow manual entry for testing
+    accessToken = "Bearer " + InputToken  # added this to combine “Bearer” with the token string
 else:
-    # added my bot token here for quick testing (hard-coded)
-    accessToken = "Bearer NzUyZDJlY2UtZTE2Ny00MDQ0LTliNDYtOTc2MWJkZTM1YjA2NDMzZmVmODMtNjQw_P0A1_636b97a0-b0af-4297-b0e7-480dd517b3f9"
+    accessToken = "Bearer NzUyZDJlY2UtZTE2Ny00MDQ0LTliNDYtOTc2MWJkZTM1YjA2NDMzZmVmODMtNjQw_P0A1_636b97a0-b0af-4297-b0e7-480dd517b3f9"  # replaced with my bot token
 
-# this connects to Webex and lists all my rooms
+# 3. Provide the URL to the Webex room API.
 r = requests.get("https://webexapis.com/v1/rooms",
                  headers={"Authorization": accessToken})
 
+###################################################################################
+# DO NOT EDIT ANY BLOCKS WITH r.status_code
 if not r.status_code == 200:
     raise Exception("Incorrect reply from Webex API. Status code: {}. Text: {}".format(r.status_code, r.text))
+###################################################################################
 
-# shows all available rooms in my account
+# 4. Create a loop to print the type and title of each room.
 print("\nList of available rooms:")
 rooms = r.json()["items"]
 for room in rooms:
     print("Type:", room["type"], "Title:", room["title"])
 
-# loop to find the room name the user typed in
+###################################################################################
+# SEARCH FOR WEBEX ROOM TO MONITOR
+###################################################################################
 while True:
     roomNameToSearch = input("Which room should be monitored for the /seconds messages? ")
     roomIdToGetMessages = None
 
     for room in rooms:
-        # added this part to match user input with the actual room name
-        if room["title"].find(roomNameToSearch) != -1:
+        if room["title"].find(roomNameToSearch) != -1:  # I added this simple search to match room names
             print("Found rooms with the word " + roomNameToSearch)
             print(room["title"])
             roomIdToGetMessages = room["id"]
@@ -54,7 +66,9 @@ while True:
     else:
         break
 
-# this keeps the bot running and checking for messages every second
+###################################################################################
+# WEBEX BOT CODE
+###################################################################################
 while True:
     time.sleep(1)
     GetParameters = {
@@ -62,11 +76,12 @@ while True:
         "max": 1
     }
 
-    # added this part to get the latest message from the chosen Webex room
+    # 5. Provide the URL to the Webex messages API.
     r = requests.get("https://webexapis.com/v1/messages",
                      params=GetParameters,
                      headers={"Authorization": accessToken})
 
+    # verify if the returned HTTP status code is 200/OK
     if not r.status_code == 200:
         print("Incorrect reply from Webex API. Status code:", r.status_code)
         print("Text:", r.text)
@@ -81,48 +96,48 @@ while True:
     message = messages[0]["text"]
     print("Message received:", message)
 
-    # added this part so the bot only reacts to messages that start with "/"
-    if message.find("/") == 0:
+    if message.find("/") == 0:  # added this condition so the bot only reacts to messages starting with “/”
         if message[1:].isdigit():
-            seconds = int(message[1:])
+            seconds = int(message[1:])  # converts number after "/" into seconds
         else:
             print("Input is invalid, try again")
             continue
 
-        # I added this limit so the delay doesn't go over 5 seconds during testing
+        # for the sake of testing, the max number of seconds is set to 5.
         if seconds > 5:
-            seconds = 5
+            seconds = 5  # I added this limit so the wait doesn’t go too long
 
         time.sleep(seconds)
 
-        # this gets the current ISS location from the ISS API
-        r = requests.get("http://api.open-notify.org/iss-now.json")
+        # 6. Provide the URL to the ISS Current Location API.
+        r = requests.get("http://api.open-notify.org/iss-now.json")  # added this API call to get ISS coordinates
         json_data = r.json()
 
         if r.status_code != 200:
             print("ISS data could not be retrieved")
             continue
 
-        # added these lines to store latitude, longitude, and timestamp from the ISS data
-        lat = json_data["iss_position"]["latitude"]
+        # 7. Record the ISS GPS coordinates and timestamp.
+        lat = json_data["iss_position"]["latitude"]  # I added these to store latitude and longitude
         lng = json_data["iss_position"]["longitude"]
         timestamp = json_data["timestamp"]
 
-        # converts the time from numbers to readable date and time
-        timeString = time.ctime(timestamp)
+        # 8. Convert the timestamp epoch value to a human readable date and time.
+        timeString = time.ctime(timestamp)  # added this to make the timestamp readable
 
-        # added my own LocationIQ API key here for the reverse geocode lookup
+        # 9. Provide your Geolocation API consumer key.
         mapsAPIGetParameters = {
-            "key": "pk.cb8dfc0f12f34b86334407ab1c5306f9",
+            "key": "pk.cb8dfc0f12f34b86334407ab1c5306f9",  # added my LocationIQ API key here
             "lat": lat,
             "lon": lng,
             "format": "json"
         }
 
-        # this sends the ISS coordinates to the LocationIQ API
+        # 10. Provide the URL to the Reverse GeoCode API.
         r = requests.get("https://us1.locationiq.com/v1/reverse",
                          params=mapsAPIGetParameters)
 
+        # Verify if the returned JSON data from the API service are OK
         json_data = r.json()
         if r.status_code != 200:
             print("Location data could not be obtained")
@@ -130,25 +145,25 @@ while True:
         else:
             print("Location data obtained")
 
-        # added this part to extract readable location info from the API response
-        CountryResult = json_data["address"].get("country", "Unknown")
+        # 11. Store the location received from the API in required variables
+        CountryResult = json_data["address"].get("country", "Unknown")  # I added .get() to prevent crashes if missing
         StateResult = json_data["address"].get("state", "Unknown")
         CityResult = json_data["address"].get("city", "Unknown")
         StreetResult = json_data["address"].get("road", "Unknown")
 
-        # converts the country code to full name using the iso3166 library
+        #Find the country name using ISO3166 country code
         if not CountryResult == "XZ":
-            CountryResult = countries.get(CountryResult).name
+            CountryResult = countries.get(CountryResult).name  # added this so it shows full country name
 
-        # added this message format so it looks nice when sent to Webex
+        # 12. Complete the code to format the response message.
         if CountryResult == "Unknown" and CityResult == "Unknown":
             responseMessage = "On {}, the ISS was flying over a body of water at latitude {}° and longitude {}°.".format(timeString, lat, lng)
         else:
             responseMessage = "On {}, the ISS was flying over {}, {}, {} ({}, {}).".format(timeString, CityResult, StateResult, CountryResult, lat, lng)
 
-        print("Sending to Webex:", responseMessage)
+        print("Sending to Webex:", responseMessage)  # added this print just to see what message is sent
 
-        # added this part to send the final message back to the Webex room
+        # 13. Complete the code to post the message to the Webex room.
         HTTPHeaders = {
             "Authorization": accessToken,
             "Content-Type": "application/json"
@@ -159,7 +174,7 @@ while True:
             "text": responseMessage
         }
 
-        # this sends the formatted ISS location message to Webex
+        # added this POST request to send the formatted message to Webex
         r = requests.post("https://webexapis.com/v1/messages",
                           data=json.dumps(PostData),
                           headers=HTTPHeaders)
@@ -167,4 +182,4 @@ while True:
         if r.status_code != 200:
             print("Message could not be sent to Webex. Status code:", r.status_code)
         else:
-            print("Message successfully sent to Webex.")
+            print("Message successfully sent to Webex.")  # added this confirmation print
